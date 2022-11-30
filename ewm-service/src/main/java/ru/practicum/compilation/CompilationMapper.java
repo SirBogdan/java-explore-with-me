@@ -8,14 +8,6 @@ import ru.practicum.event.dto.EventDtoShort;
 import java.util.List;
 
 public class CompilationMapper {
-/*    public Compilation fromCompilationDto(CompilationDto compilationDto) {
-        return Compilation.builder()
-                .id(compilationDto.getId())
-                .title(compilationDto.getTitle())
-                .pinned(compilationDto.getPinned())
-                .events()
-                .build();
-    }*/
 
     public static CompilationDto toCompilationDto(Compilation compilation, List<EventDtoShort> events) {
         return CompilationDto.builder()

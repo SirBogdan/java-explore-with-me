@@ -1,4 +1,4 @@
-package ru.practicum;
+package ru.practicum.utils;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

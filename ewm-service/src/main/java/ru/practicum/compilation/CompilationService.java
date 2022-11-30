@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.CustomPageRequest;
 import ru.practicum.compilation.dto.CompilationDto;
 import ru.practicum.compilation.dto.CompilationDtoNew;
 import ru.practicum.event.Event;
@@ -13,6 +12,7 @@ import ru.practicum.event.EventMapper;
 import ru.practicum.event.EventService;
 import ru.practicum.event.dto.EventDtoShort;
 import ru.practicum.exceptions.ObjectNotFoundException;
+import ru.practicum.utils.CustomPageRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +28,8 @@ public class CompilationService {
 
     @Transactional
     public CompilationDto createCompilation(CompilationDtoNew compilationDtoNew) {
-        List<Event> events = compilationDtoNew.getEvents().stream()
+        List<Long> compilationEvents = compilationDtoNew.getEvents();
+        List<Event> events = compilationEvents.stream()
                 .map(eventId -> EventMapper.fromEventDtoFull(eventService.getEventByIdFull(eventId)))
                 .collect(Collectors.toList());
         List<EventDtoShort> eventDtoShortList = eventService.fromEventToEventDtoShort(events);
@@ -59,8 +60,8 @@ public class CompilationService {
         Compilation compilation = compilationRepository.findById(compId).orElseThrow(
                 () -> new ObjectNotFoundException(String.format(
                         "Подборки с id %d не существует", compId)));
-
-        compilation.getEvents().add(EventMapper.fromEventDtoFull(eventService.getEventByIdFull(eventId)));
+        Event event = EventMapper.fromEventDtoFull(eventService.getEventByIdFull(eventId));
+        compilation.getEvents().add(event);
         compilationRepository.save(compilation);
     }
 

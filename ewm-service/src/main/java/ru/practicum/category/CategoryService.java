@@ -5,11 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.CustomPageRequest;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.dto.CategoryDtoShort;
 import ru.practicum.exceptions.ObjectNotFoundException;
 import ru.practicum.exceptions.ValidationException;
+import ru.practicum.utils.CustomPageRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,10 +32,6 @@ public class CategoryService {
     @Transactional
     public CategoryDto updateCategory(CategoryDto categoryDto) {
         Category category = CategoryMapper.fromCategoryDto(categoryDto);
-        long id = category.getId();
-        categoryRepository.findById(id).orElseThrow(
-                () -> new ValidationException(String.format(
-                        "Ошибка: категории с id %d не существует", id)));
 
         if (category.getName() == null) {
             throw new ValidationException("Нельзя поменять название категории на null");

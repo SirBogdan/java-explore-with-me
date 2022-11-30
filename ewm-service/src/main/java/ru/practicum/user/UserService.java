@@ -5,11 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.CustomPageRequest;
 import ru.practicum.exceptions.ObjectNotFoundException;
 import ru.practicum.exceptions.ValidationException;
 import ru.practicum.user.dto.UserDto;
 import ru.practicum.user.dto.UserDtoShort;
+import ru.practicum.utils.CustomPageRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.CustomPageRequest;
 import ru.practicum.category.Category;
 import ru.practicum.category.CategoryMapper;
 import ru.practicum.category.CategoryService;
@@ -23,13 +22,14 @@ import ru.practicum.stats.StatsClient;
 import ru.practicum.stats.ViewStats;
 import ru.practicum.user.UserMapper;
 import ru.practicum.user.UserService;
-import ru.practicum.event.QEvent;
+import ru.practicum.utils.CustomPageRequest;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import ru.practicum.event.QEvent;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +39,11 @@ public class EventService {
 
     private static final String EWM = "explore-with-me";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final int MIN_CREATED_START_INTERVAL = 2;
+    private static final int MIN_PUBLISH_START_INTERVAL = 1;
+    private static final String SORT_BY_DATE = "EVENT_DATE";
+    private static final String VIEWS = "VIEWS";
+
 
     private final EventRepository eventRepository;
     private final LocationRepository locationRepository;
@@ -50,12 +55,12 @@ public class EventService {
     @Transactional
     public EventDtoFull createEvent(EventDtoNew eventDtoNew, long initiatorId) {
         Category category = CategoryMapper.fromCategoryDto(
-          categoryService.getCategoryById(eventDtoNew.getCategory()));
+                categoryService.getCategoryById(eventDtoNew.getCategory()));
         Event event = EventMapper.fromEventDtoNew(eventDtoNew, category);
         event.setCategory(CategoryMapper.fromCategoryDto(
                 categoryService.getCategoryById(event.getCategory().getId())));
         event.setCreatedOn(LocalDateTime.now());
-        if (event.getCreatedOn().plusHours(2).isAfter(event.getEventDate())) {
+        if (event.getCreatedOn().plusHours(MIN_CREATED_START_INTERVAL).isAfter(event.getEventDate())) {
             throw new ValidationException(
                     "Время начала события должно быть позже времени создания события минимум на 2 часа.");
         }
@@ -250,7 +255,7 @@ public class EventService {
                 () -> new ObjectNotFoundException(String.format(
                         "События с id %d не существует", eventId)));
         LocalDateTime now = LocalDateTime.now();
-        if (now.plusHours(1).isAfter(event.getEventDate())) {
+        if (now.plusHours(MIN_PUBLISH_START_INTERVAL).isAfter(event.getEventDate())) {
             throw new ValidationException(
                     "Время начала события должно быть позже времени публикации события минимум на 1 час.");
         }
@@ -335,11 +340,11 @@ public class EventService {
         }
         List<EventDtoShort> eventDtoShortList = fromEventToEventDtoShort(events);
         if (sort != null) {
-            if (sort.equals("EVENT_DATE")) {
+            if (sort.equals(SORT_BY_DATE)) {
                 eventDtoShortList.stream()
                         .sorted(Comparator.comparing(EventDtoShort::getEventDate))
                         .collect(Collectors.toList());
-            } else if (sort.equals("VIEWS")) {
+            } else if (sort.equals(VIEWS)) {
                 eventDtoShortList.stream()
                         .sorted(Comparator.comparing(EventDtoShort::getViews))
                         .collect(Collectors.toList());
