@@ -7,6 +7,9 @@ import ru.practicum.event.dto.EventDtoShort;
 
 import java.util.List;
 
+/**
+ * Mapper to/from DTO, linked to {@link Compilation}
+ */
 public class CompilationMapper {
 
     public static CompilationDto toCompilationDto(Compilation compilation, List<EventDtoShort> events) {

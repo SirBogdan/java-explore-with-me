@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+/**
+ * Repository, linked to {@link Request}
+ */
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
     boolean existsByEvent_IdAndRequester_Id(long eventId, long userId);

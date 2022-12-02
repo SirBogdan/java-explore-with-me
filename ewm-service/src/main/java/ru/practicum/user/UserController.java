@@ -9,6 +9,9 @@ import ru.practicum.user.dto.UserDtoShort;
 
 import java.util.List;
 
+/**
+ * Controller to endpoints, linked to {@link User}
+ */
 @RestController
 @RequestMapping(path = "/admin/users")
 @Slf4j

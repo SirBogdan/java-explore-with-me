@@ -1,3 +1,48 @@
-# java-explore-with-me
-Template repository for ExploreWithMe project.
-Pull-request link: https://github.com/SirBogdan/java-explore-with-me/pull/2
+# EXPLORE WITH ME
+##### Приложение предоставляет возможность делиться информацией об интересных событиях и помогать найти компанию для участия в них.
+
+[Pull-request] (https://github.com/SirBogdan/java-explore-with-me/pull/2)
+
+# Используемые технологии
+* Java 11, Lombok;
+* Spring Boot
+* PostgreSQL, SQL;
+* Hibernate, JPA, JPQL;
+* Docker;
+* Maven (multi-module project);
+* Swagger;
+* Postman.
+
+# Инструкция (команды) по запуску приложения
+
+1. git clone https://github.com/SirBogdan/java-explore-with-me.git
+2. mvn package
+3. docker-compose up
+
+# Архитектура приложения
+
+![](ewm architecture.png)
+
+# Компоненты приложения
+
+### ewm-service
+##### PORTS: 8080:8080
+Реализует основную бизнес-логику приложения. API подразделяется на три части:
+1. **Public** - содержит логику для работы с приложением для любого, неавторизованного пользователя.
+2. **Private** - содержит логику для работы с авторизованными пользователями.
+3. **Admin** - содержит логику работы в роли администратора ресурса
+
+### ewm-database
+##### PORTS: 6541:5432
+![](ewm-service/ewm-service database scheme.PNG)
+
+### stats-server
+##### PORTS: 9090:9090
+Сервис собирает информацию о количестве обращений пользователей к спискам событий и о количестве запросов к подробной
+информации о событии. На основе этой информации формируется статистика о работе приложения.
+
+### stats-database
+##### PORTS: 6542:5432
+![](stats-server/stats-server database scheme.PNG)
+
+

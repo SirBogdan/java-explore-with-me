@@ -7,6 +7,9 @@ import ru.practicum.user.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Entity give to users ability to take participation in event
+ */
 @Getter
 @Setter
 @ToString

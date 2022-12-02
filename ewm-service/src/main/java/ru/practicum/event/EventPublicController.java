@@ -13,6 +13,9 @@ import ru.practicum.event.dto.EventDtoShort;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * Controller to Public endpoints, linked to {@link Event}
+ */
 @RestController
 @RequiredArgsConstructor
 @Slf4j

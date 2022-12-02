@@ -6,6 +6,9 @@ import ru.practicum.dto.ViewStats;
 
 import java.util.List;
 
+/**
+ * Interface of service-layer, containing business-logic and linked to {@link Hit}
+ */
 public interface HitService {
     HitDto createHit(HitDtoCreate hitDtoCreate);
 

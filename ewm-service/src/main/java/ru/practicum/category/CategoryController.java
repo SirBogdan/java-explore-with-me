@@ -9,6 +9,9 @@ import ru.practicum.category.dto.CategoryDtoShort;
 
 import java.util.List;
 
+/**
+ * Controller to endpoints, linked to {@link Category}
+ */
 @RestController
 @Slf4j
 public class CategoryController {

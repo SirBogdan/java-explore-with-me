@@ -3,6 +3,9 @@ package ru.practicum.user;
 import ru.practicum.user.dto.UserDto;
 import ru.practicum.user.dto.UserDtoShort;
 
+/**
+ * Mapper to/from DTO, linked to {@link User}
+ */
 public class UserMapper {
 
     public static User fromUserDtoShort(UserDtoShort userDtoShort) {

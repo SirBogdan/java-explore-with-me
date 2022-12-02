@@ -10,6 +10,9 @@ import ru.practicum.dto.ViewStats;
 
 import java.util.List;
 
+/**
+ * Controller to endpoints, linked to {@link Hit}
+ */
 @RestController
 @RequiredArgsConstructor
 @Slf4j

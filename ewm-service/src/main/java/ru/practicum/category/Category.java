@@ -5,6 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Category entity - field of main class {@link ru.practicum.event.Event},
+ * representing information about event's category
+ */
 @Getter
 @Setter
 @ToString
@@ -16,6 +20,9 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    /**
+     * Category name
+     */
     @Column(name = "name", nullable = false)
     private String name;
 

@@ -6,6 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Main entity of Stats-server, that is using to save data about getting event's information
+ */
 @Getter
 @Setter
 @ToString

@@ -7,6 +7,9 @@ import ru.practicum.dto.ViewStats;
 
 import java.util.List;
 
+/**
+ * Repository, linked to {@link Hit}
+ */
 public interface HitRepository extends JpaRepository<Hit, Long> {
     @Query("select new ru.practicum.dto.ViewStats(h.app, h.uri, count(h.ip))" +
             "from Hit as h " +

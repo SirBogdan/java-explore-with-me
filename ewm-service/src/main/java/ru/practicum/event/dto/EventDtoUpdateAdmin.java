@@ -6,6 +6,10 @@ import ru.practicum.event.location.Location;
 
 import java.time.LocalDateTime;
 
+/**
+ * Data transfer object for {@link ru.practicum.event.Event}
+ * <p>Contains fields, that should be update by Admin</p>
+ */
 @Getter
 @Setter
 @NoArgsConstructor

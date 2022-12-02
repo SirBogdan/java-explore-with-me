@@ -1,0 +1,33 @@
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: INFO
+          jpa.JpaTransactionManager: DEBUG
+        transaction: INFO
+        transaction.interceptor: TRACE
+server:
+  port: 8080
+spring:
+  config:
+    activate:
+      on-profile: ci,test
+  datasource:
+    driverClassName: org.h2.Driver
+    password: test
+    url: jdbc:h2:mem:server
+    username: test
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+    show-sql: true
+  sql:
+    init:
+      mode: always
+stats-server:
+  url: http://localhost:9090

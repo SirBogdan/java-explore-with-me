@@ -12,6 +12,9 @@ import ru.practicum.request.RequestDtoParticipation;
 
 import java.util.List;
 
+/**
+ * Controller to Private endpoints, linked to {@link Event}
+ */
 @RestController
 @RequestMapping(path = "/users/{userId}/events")
 @RequiredArgsConstructor

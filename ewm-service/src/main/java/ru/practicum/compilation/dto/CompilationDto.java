@@ -5,6 +5,9 @@ import ru.practicum.event.dto.EventDtoShort;
 
 import java.util.List;
 
+/**
+ * Data transfer object for {@link ru.practicum.compilation.Compilation}
+ */
 @Getter
 @Setter
 @NoArgsConstructor
