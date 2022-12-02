@@ -21,7 +21,7 @@
 
 # Архитектура приложения
 
-![](ewm architecture.png)
+![ewm architecture](https://user-images.githubusercontent.com/100284165/205351591-40b3031f-b4be-425d-8dd0-c633783989fc.png)
 
 # Компоненты приложения
 
@@ -34,7 +34,9 @@
 
 ### ewm-database
 ##### PORTS: 6541:5432
-![](ewm-service/ewm-service database scheme.PNG)
+
+<img width="324" alt="ewm-service database scheme" src="https://user-images.githubusercontent.com/100284165/205351666-c23cbad9-2a65-4fd9-adde-d57063d639d5.PNG">
+
 
 ### stats-server
 ##### PORTS: 9090:9090
@@ -43,6 +45,6 @@
 
 ### stats-database
 ##### PORTS: 6542:5432
-![](stats-server/stats-server database scheme.PNG)
+<img width="133" alt="stats-server database scheme" src="https://user-images.githubusercontent.com/100284165/205351696-69e49d11-701b-43f0-8fc3-6ed80c3348de.PNG">
 
 
