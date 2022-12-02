@@ -3,6 +3,9 @@ package ru.practicum;
 import ru.practicum.dto.HitDto;
 import ru.practicum.dto.HitDtoCreate;
 
+/**
+ * Mapper to/from DTO, linked to {@link Hit}
+ */
 public class HitMapper {
     public static Hit fromHitDtoCreate(HitDtoCreate hitDtoCreate) {
         return Hit.builder()

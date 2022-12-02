@@ -7,6 +7,9 @@ import ru.practicum.user.dto.UserDtoShort;
 
 import java.time.LocalDateTime;
 
+/**
+ * Shot version of data transfer object for {@link ru.practicum.event.Event}
+ */
 @Getter
 @Setter
 @NoArgsConstructor

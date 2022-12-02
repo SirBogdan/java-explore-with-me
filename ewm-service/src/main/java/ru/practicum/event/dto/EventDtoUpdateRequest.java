@@ -8,6 +8,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+/**
+ * Data transfer object for {@link ru.practicum.event.Event}
+ * <p>Contains fields, that should be update by initiator</p>
+ */
 @Getter
 @Setter
 @NoArgsConstructor

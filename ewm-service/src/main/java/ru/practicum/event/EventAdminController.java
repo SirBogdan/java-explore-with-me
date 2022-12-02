@@ -9,6 +9,9 @@ import ru.practicum.event.dto.EventDtoUpdateAdmin;
 
 import java.util.List;
 
+/**
+ * Controller to Admin endpoints, linked to {@link Event}
+ */
 @RestController
 @RequestMapping(path = "/admin/events")
 @RequiredArgsConstructor

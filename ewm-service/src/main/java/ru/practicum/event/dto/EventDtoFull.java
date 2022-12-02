@@ -9,6 +9,10 @@ import ru.practicum.user.dto.UserDtoShort;
 
 import java.time.LocalDateTime;
 
+/**
+ * Data transfer object for {@link ru.practicum.event.Event}
+ * <p>Contains maximum information about event</p>
+ */
 @Getter
 @Setter
 @NoArgsConstructor

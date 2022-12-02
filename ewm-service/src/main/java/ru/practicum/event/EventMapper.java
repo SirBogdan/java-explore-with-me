@@ -5,6 +5,9 @@ import ru.practicum.category.CategoryMapper;
 import ru.practicum.event.dto.*;
 import ru.practicum.user.UserMapper;
 
+/**
+ * Mapper to/from DTO, linked to {@link Event}
+ */
 public class EventMapper {
     public static Event fromEventDtoFull(EventDtoFull eventDtoFull) {
         return Event.builder()

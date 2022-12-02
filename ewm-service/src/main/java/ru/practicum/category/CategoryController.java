@@ -9,11 +9,13 @@ import ru.practicum.category.dto.CategoryDtoShort;
 
 import java.util.List;
 
+/**
+ * Controller to endpoints, linked to {@link Category}
+ */
 @RestController
 @Slf4j
 public class CategoryController {
     private final CategoryService categoryService;
-
     @Autowired
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import ru.practicum.utils.NPEChecker;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -28,6 +29,7 @@ public class StatsClient {
     }
 
     public void sendHit(HitDtoCreate hitDtoCreate) {
+        NPEChecker.checkObjNullValue(hitDtoCreate);
         webClient.post()
                 .uri("/hit")
                 .header("Content-Type", "application/json")
@@ -38,6 +40,7 @@ public class StatsClient {
     }
 
     public List<ViewStats> getStats(String start, String end, List<String> uris, Boolean unique) {
+        NPEChecker.checkObjNullValue(start, end);
         StringBuilder sb = new StringBuilder();
         sb.append("/stats")
                 .append("?start=")

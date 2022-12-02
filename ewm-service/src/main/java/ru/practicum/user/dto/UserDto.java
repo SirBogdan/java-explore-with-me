@@ -2,6 +2,9 @@ package ru.practicum.user.dto;
 
 import lombok.*;
 
+/**
+ * Data transfer object for {@link ru.practicum.user.User}
+ */
 @Getter
 @Setter
 @NoArgsConstructor

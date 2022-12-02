@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller to endpoints, linked to {@link Request}
+ */
 @RestController
 @RequestMapping(path = "/users/{userId}/requests")
 @RequiredArgsConstructor

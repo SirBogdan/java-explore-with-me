@@ -3,6 +3,9 @@ package ru.practicum.category;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.dto.CategoryDtoShort;
 
+/**
+ * Mapper to/from DTO, linked to {@link Category}
+ */
 public class CategoryMapper {
 
     public static Category fromCategoryDtoShort(CategoryDtoShort categoryDtoShort) {

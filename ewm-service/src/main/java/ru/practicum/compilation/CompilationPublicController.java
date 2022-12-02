@@ -8,6 +8,9 @@ import ru.practicum.compilation.dto.CompilationDto;
 
 import java.util.List;
 
+/**
+ * Controller to Public endpoints, linked to {@link Compilation}
+ */
 @RestController
 @RequestMapping(path = "/compilations")
 @RequiredArgsConstructor

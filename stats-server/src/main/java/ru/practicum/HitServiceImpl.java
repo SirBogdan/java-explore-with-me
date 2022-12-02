@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.dto.HitDto;
 import ru.practicum.dto.HitDtoCreate;
 import ru.practicum.dto.ViewStats;
+import ru.practicum.utils.NPEChecker;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -14,7 +15,11 @@ import java.util.List;
 
 import static java.net.URLDecoder.decode;
 
-
+/**
+ * Base implementation of service-layer interface, containing business-logic and linked to {@link Hit}
+ *
+ * @version 1.0
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,6 +29,7 @@ public class HitServiceImpl implements HitService {
 
     @Transactional
     public HitDto createHit(HitDtoCreate hitDtoCreate) {
+        NPEChecker.checkObjNullValue(hitDtoCreate);
         Hit hit = HitMapper.fromHitDtoCreate(hitDtoCreate);
         hit.setTimestamp(LocalDateTime.now());
         hit = hitRepository.save(hit);
@@ -32,6 +38,7 @@ public class HitServiceImpl implements HitService {
     }
 
     public List<ViewStats> getStats(String start, String end, List<String> uris, Boolean unique) {
+        NPEChecker.checkObjNullValue(start, end);
         start = decode(start, StandardCharsets.UTF_8);
         end = decode(end, StandardCharsets.UTF_8);
 

@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.compilation.dto.CompilationDto;
 import ru.practicum.compilation.dto.CompilationDtoNew;
 
+/**
+ * Controller to Admin endpoints, linked to {@link Compilation}
+ */
 @RestController
 @RequestMapping(path = "/admin/compilations")
 @RequiredArgsConstructor
 @Slf4j
 public class CompilationAdminController {
 
-    private final CompilationService compilationService;
+    private final CompilationServiceImpl compilationService;
 
     @PostMapping
     public CompilationDto createCompilation(@RequestBody @Validated CompilationDtoNew compilationDtoNew) {

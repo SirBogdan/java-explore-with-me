@@ -9,6 +9,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+/**
+ * Shot version of data transfer object for {@link ru.practicum.event.Event}
+ * <p>Contains fields, necessary to create new entity</p>
+ *
+ * @see ru.practicum.event.EventServiceImpl#createEvent(EventDtoNew, long)
+ */
 @Getter
 @Setter
 @NoArgsConstructor

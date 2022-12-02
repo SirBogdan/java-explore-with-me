@@ -6,6 +6,10 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+
+/**
+ * Data transfer object for {@link Request}
+ */
 @Getter
 @Setter
 @NoArgsConstructor

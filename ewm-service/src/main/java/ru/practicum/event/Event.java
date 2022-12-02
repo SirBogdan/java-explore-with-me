@@ -9,6 +9,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Main entity of application
+ */
 @Getter
 @Setter
 @ToString
