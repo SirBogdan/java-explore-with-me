@@ -10,14 +10,11 @@ logging:
 server:
   port: 9090
 spring:
-  config:
-    activate:
-      on-profile: ci,test
   datasource:
-    driverClassName: org.h2.Driver
-    password: test
-    url: jdbc:h2:mem:stats
-    username: test
+    driverClassName: org.postgresql.Driver
+    password: 94633384
+    url: jdbc:postgresql://localhost:5432/ewm-stats
+    username: postgres
   jpa:
     hibernate:
       ddl-auto: none
@@ -29,3 +26,13 @@ spring:
   sql:
     init:
       mode: always
+---
+spring:
+  config:
+    activate:
+      on-profile: ci,test
+  datasource:
+    driverClassName: org.h2.Driver
+    password: test
+    url: jdbc:h2:mem:stats
+    username: test

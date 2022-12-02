@@ -9,12 +9,9 @@ services:
       - stats-db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/ewm-stats
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=94633384
-      - DB_NAME=ewm-stats
-      - DB_HOST=localhost
-      - DB_PORT=5432
-
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=94633384
+      -
   stats-db:
     image: postgres:14-alpine
     container_name: stats-db
@@ -35,11 +32,8 @@ services:
       - stats-server
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/ewm-server
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=94633384
-      - DB_NAME=ewm-server
-      - DB_HOST=localhost
-      - DB_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=94633384
       - STATS-SERVER_URL=http://stats-server:9090
 
   ewm-db:
