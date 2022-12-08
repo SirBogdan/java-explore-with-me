@@ -1,10 +1,13 @@
-package ru.practicum.event.location;
+package ru.practicum.area;
 
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Entity of created by Admin Areas. Using to search {@link ru.practicum.event.Event} in area
+ */
 @Getter
 @Setter
 @ToString
@@ -12,8 +15,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "locations", schema = "public")
-public class Location {
+@Table(name = "areas", schema = "public")
+public class Area {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,13 +24,20 @@ public class Location {
     private Float lat;
     @Column(name = "lon", nullable = false)
     private Float lon;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "radius")
+    private Float radius;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private AreaType type;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Location location = (Location) o;
-        return id == location.id;
+        Area area = (Area) o;
+        return id == area.id;
     }
 
     @Override

@@ -37,11 +37,11 @@ public interface EventService {
 
     List<EventDtoShort> getEventsFiltered(
             String text, List<Long> categoriesIds, Boolean paid, String rangeStart, String rangeEnd,
-            Boolean onlyAvailable, String sort, Integer from, Integer size, String ip);
+            Boolean onlyAvailable, Long areaId, String sort, Integer from, Integer size, String ip);
 
     List<EventDtoFull> getAllEventsByAdmin(
             List<Long> users, List<String> states, List<Long> categoriesIds,
-            String rangeStart, String rangeEnd, Integer from, Integer size);
+            String rangeStart, String rangeEnd, Long areaId, Integer from, Integer size);
 
     List<EventDtoShort> fromEventToEventDtoShort(List<Event> events);
 }

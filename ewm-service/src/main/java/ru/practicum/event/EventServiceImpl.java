@@ -7,12 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.area.Area;
+import ru.practicum.area.AreaMapper;
+import ru.practicum.area.AreaService;
 import ru.practicum.category.Category;
 import ru.practicum.category.CategoryMapper;
 import ru.practicum.category.CategoryService;
 import ru.practicum.event.dto.*;
-import ru.practicum.event.location.Location;
-import ru.practicum.event.location.LocationRepository;
 import ru.practicum.exceptions.ForbiddenException;
 import ru.practicum.exceptions.ObjectNotFoundException;
 import ru.practicum.exceptions.ValidationException;
@@ -66,11 +67,11 @@ public class EventServiceImpl implements EventService {
 
 
     private final EventRepository eventRepository;
-    private final LocationRepository locationRepository;
     private final CategoryService categoryService;
     private final UserService userService;
     private final RequestRepository requestRepository;
     private final StatsClient statsClient;
+    private final AreaService areaService;
 
     @Override
     @Transactional
@@ -91,15 +92,6 @@ public class EventServiceImpl implements EventService {
             event.setParticipantLimit(0);
         }
         event.setState(EventState.PENDING);
-        Location location = event.getLocation();
-        Location locationFromDb = locationRepository.findByLatAndLon(
-                location.getLat(), location.getLon());
-        if (locationFromDb == null) {
-            location = locationRepository.save(event.getLocation());
-            event.setLocation(location);
-        } else {
-            event.setLocation(locationFromDb);
-        }
         event = eventRepository.save(event);
 
         return EventMapper.toEventDtoFull(event, 0, 0);
@@ -122,7 +114,8 @@ public class EventServiceImpl implements EventService {
                 categoryService.getCategoryById(event.getCategory().getId())));
         event.setCreatedOn(eventFromDb.getCreatedOn());
         event.setInitiator(eventFromDb.getInitiator());
-        event.setLocation(eventFromDb.getLocation());
+        event.setLat(eventFromDb.getLat());
+        event.setLon(eventFromDb.getLon());
         if (event.getParticipantLimit() == null) {
             event.setParticipantLimit(0);
         }
@@ -274,7 +267,11 @@ public class EventServiceImpl implements EventService {
         event.setCategory(CategoryMapper.fromCategoryDto(
                 categoryService.getCategoryById(eventDtoUpdateAdmin.getCategory())));
         event.setState(EventState.PENDING);
-        if (event.getLocation() == null) event.setLocation(eventFromDb.getLocation());
+
+        if (event.getLat() == null) {
+            event.setLat(eventFromDb.getLat());
+            event.setLon(eventFromDb.getLon());
+        }
         if (event.getRequestModeration() == null) event.setRequestModeration(eventFromDb.getRequestModeration());
         event = eventRepository.save(event);
 
@@ -354,6 +351,7 @@ public class EventServiceImpl implements EventService {
      * @param onlyAvailable only events that have not reached the limit of participation requests
      * @param sort          Sorting option: by event date or by number of views
      * @param from          the number of events that need to be skipped to form the current list
+     * @param areaId        id of searching area
      * @param size          number of events in the list
      * @param ip            ip of requester
      * @return list of events
@@ -361,7 +359,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventDtoShort> getEventsFiltered(
             String text, List<Long> categoriesIds, Boolean paid, String rangeStart, String rangeEnd,
-            Boolean onlyAvailable, String sort, Integer from, Integer size, String ip) {
+            Boolean onlyAvailable, Long areaId, String sort, Integer from, Integer size, String ip) {
         Pageable pageable = CustomPageRequest.of(from, size);
         LocalDateTime start;
         LocalDateTime end;
@@ -382,6 +380,11 @@ public class EventServiceImpl implements EventService {
         if (categoriesIds != null && !categoriesIds.isEmpty()) builder.and(qEvent.category.id.in(categoriesIds));
         if (paid != null) builder.and(qEvent.paid.eq(paid));
         builder.and(qEvent.eventDate.between(start, end));
+        if (areaId != null) {
+            Area area = AreaMapper.fromAreaDtoFull(areaService.getAreaById(areaId));
+            List<Long> idsInArea = eventRepository.findEventsIdsInArea(area.getLat(), area.getLon(), area.getRadius());
+            builder.and(qEvent.id.in(idsInArea));
+        }
 
         List<Event> events = eventRepository.findAll(builder, pageable).toList();
         if (onlyAvailable != null) {
@@ -413,6 +416,7 @@ public class EventServiceImpl implements EventService {
      * @param categoriesIds the list of ids of the categories in which the search will be conducted
      * @param rangeStart    date and time not earlier than when the event should occur
      * @param rangeEnd      date and time no later than which the event should occur
+     * @param areaId        id of searching area
      * @param from          the number of events that need to be skipped to form the current list
      * @param size          number of events in the list
      * @return list of events
@@ -420,7 +424,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventDtoFull> getAllEventsByAdmin(
             List<Long> users, List<String> states, List<Long> categoriesIds,
-            String rangeStart, String rangeEnd, Integer from, Integer size) {
+            String rangeStart, String rangeEnd, Long areaId, Integer from, Integer size) {
         Pageable pageable = CustomPageRequest.of(from, size);
         LocalDateTime start;
         LocalDateTime end;
@@ -441,6 +445,11 @@ public class EventServiceImpl implements EventService {
         }
         if (categoriesIds != null && !categoriesIds.isEmpty()) builder.and(qEvent.category.id.in(categoriesIds));
         builder.and(qEvent.eventDate.between(start, end));
+        if (areaId != null) {
+            Area area = AreaMapper.fromAreaDtoFull(areaService.getAreaById(areaId));
+            List<Long> idsInArea = eventRepository.findEventsIdsInArea(area.getLat(), area.getLon(), area.getRadius());
+            builder.and(qEvent.id.in(idsInArea));
+        }
 
         List<Event> events = eventRepository.findAll(builder, pageable).toList();
 

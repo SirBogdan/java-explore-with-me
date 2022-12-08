@@ -1,4 +1,15 @@
 ru.practicum
-ru.practicum.dto
+ru.practicum.area
+ru.practicum.area.dto
+ru.practicum.category
+ru.practicum.category.dto
+ru.practicum.compilation
+ru.practicum.compilation.dto
+ru.practicum.event
+ru.practicum.event.dto
 ru.practicum.exceptions
+ru.practicum.request
+ru.practicum.stats
+ru.practicum.user
+ru.practicum.user.dto
 ru.practicum.utils
