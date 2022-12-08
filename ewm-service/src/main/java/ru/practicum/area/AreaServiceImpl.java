@@ -76,4 +76,10 @@ public class AreaServiceImpl implements AreaService {
         log.info("Запрошены все территории {}", areas);
         return areas;
     }
+
+    @Override
+    @Transactional
+    public void deleteAreaById(long areaId) {
+        areaRepository.deleteById(areaId);
+    }
 }

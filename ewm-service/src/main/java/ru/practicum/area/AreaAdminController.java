@@ -36,4 +36,9 @@ public class AreaAdminController {
         log.info("Обновлена территория {}", areaDtoFullUpdated);
         return areaDtoFullUpdated;
     }
+
+    @DeleteMapping("/{areaId}")
+    public void deleteAreaById(@PathVariable("areaId") long areaId) {
+        areaService.deleteAreaById(areaId);
+    }
 }

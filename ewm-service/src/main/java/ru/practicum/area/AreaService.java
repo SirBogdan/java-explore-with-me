@@ -17,4 +17,6 @@ public interface AreaService {
     AreaDtoFull getAreaById(long id);
 
     List<AreaDtoFull> getAllAreas(int from, int size);
+
+    void deleteAreaById(long areaId);
 }
