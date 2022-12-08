@@ -2,7 +2,6 @@ package ru.practicum.event;
 
 import lombok.*;
 import ru.practicum.category.Category;
-import ru.practicum.event.location.Location;
 import ru.practicum.user.User;
 
 import javax.persistence.*;
@@ -38,9 +37,10 @@ public class Event {
     @OneToOne
     @JoinColumn(name = "initiator_id")
     private User initiator;
-    @OneToOne
-    @JoinColumn(name = "location_id")
-    private Location location;
+    @Column(name = "lat")
+    private Float lat;
+    @Column(name = "lon")
+    private Float lon;
     @Column(name = "paid", nullable = false)
     private Boolean paid;
     @Column(name = "participant_limit", nullable = false)

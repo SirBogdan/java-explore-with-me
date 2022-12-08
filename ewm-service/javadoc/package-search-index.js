@@ -1,4 +1,1 @@
-packageSearchIndex = [{
-    "l": "All Packages",
-    "url": "allpackages-index.html"
-}, {"l": "ru.practicum"}, {"l": "ru.practicum.dto"}, {"l": "ru.practicum.exceptions"}, {"l": "ru.practicum.utils"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ru.practicum"},{"l":"ru.practicum.area"},{"l":"ru.practicum.area.dto"},{"l":"ru.practicum.category"},{"l":"ru.practicum.category.dto"},{"l":"ru.practicum.compilation"},{"l":"ru.practicum.compilation.dto"},{"l":"ru.practicum.event"},{"l":"ru.practicum.event.dto"},{"l":"ru.practicum.exceptions"},{"l":"ru.practicum.request"},{"l":"ru.practicum.stats"},{"l":"ru.practicum.user"},{"l":"ru.practicum.user.dto"},{"l":"ru.practicum.utils"}]

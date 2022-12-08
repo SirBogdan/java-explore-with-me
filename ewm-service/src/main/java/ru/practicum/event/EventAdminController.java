@@ -50,10 +50,11 @@ public class EventAdminController {
             @RequestParam(name = "categories", required = false) List<Long> categoriesIds,
             @RequestParam(name = "rangeStart", required = false) String rangeStart,
             @RequestParam(name = "rangeEnd", required = false) String rangeEnd,
+            @RequestParam(name = "areaId", required = false) Long areaId,
             @RequestParam(name = "from", defaultValue = "0", required = false) Integer from,
             @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
         List<EventDtoFull> eventDtoFulls = eventService.getAllEventsByAdmin(
-                users, states, categoriesIds, rangeStart, rangeEnd, from, size);
+                users, states, categoriesIds, rangeStart, rangeEnd, areaId, from, size);
         log.info("Запрошен список событий админом {}", eventDtoFulls);
         return eventDtoFulls;
     }

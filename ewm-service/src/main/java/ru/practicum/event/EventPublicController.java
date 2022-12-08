@@ -38,11 +38,12 @@ public class EventPublicController {
             @RequestParam(name = "rangeStart", required = false) String rangeStart,
             @RequestParam(name = "rangeEnd", required = false) String rangeEnd,
             @RequestParam(name = "onlyAvailable", required = false) Boolean onlyAvailable,
+            @RequestParam(name = "areaId", required = false) Long areaId,
             @RequestParam(name = "sort", required = false) String sort,
             @RequestParam(name = "from", defaultValue = "0", required = false) Integer from,
             @RequestParam(name = "size", defaultValue = "10", required = false) Integer size,
             HttpServletRequest request) {
         return eventService.getEventsFiltered(text, categoriesIds, paid, rangeStart, rangeEnd,
-                onlyAvailable, sort, from, size, request.getRemoteAddr());
+                onlyAvailable, areaId, sort, from, size, request.getRemoteAddr());
     }
 }

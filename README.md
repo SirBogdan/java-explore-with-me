@@ -35,8 +35,7 @@
 ### ewm-database
 ##### PORTS: 6541:5432
 
-<img width="324" alt="ewm-service database scheme" src="https://user-images.githubusercontent.com/100284165/205351666-c23cbad9-2a65-4fd9-adde-d57063d639d5.PNG">
-
+![](ewm-service/ewm-service database scheme feature.png)
 
 ### stats-server
 ##### PORTS: 9090:9090

@@ -6,6 +6,9 @@ import ru.practicum.event.Event;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Entity of compilations of main entity {@link Event}
+ */
 @Getter
 @Setter
 @RequiredArgsConstructor

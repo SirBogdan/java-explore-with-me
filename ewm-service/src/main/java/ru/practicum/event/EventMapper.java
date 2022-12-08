@@ -18,7 +18,8 @@ public class EventMapper {
                 .description(eventDtoFull.getDescription())
                 .eventDate(eventDtoFull.getEventDate())
                 .initiator(UserMapper.fromUserDtoShort(eventDtoFull.getInitiator()))
-                .location(eventDtoFull.getLocation())
+                .lat(eventDtoFull.getLocation().getLat())
+                .lon(eventDtoFull.getLocation().getLon())
                 .paid(eventDtoFull.getPaid())
                 .participantLimit(eventDtoFull.getParticipantLimit())
                 .publishedOn(eventDtoFull.getPublishedOn())
@@ -38,7 +39,7 @@ public class EventMapper {
                 .description(event.getDescription())
                 .eventDate(event.getEventDate())
                 .initiator(UserMapper.toUserDtoShort(event.getInitiator()))
-                .location(event.getLocation())
+                .location(new LocationDto(event.getLat(), event.getLon()))
                 .paid(event.getPaid())
                 .participantLimit(event.getParticipantLimit())
                 .publishedOn(event.getPublishedOn())
@@ -55,7 +56,8 @@ public class EventMapper {
                 .category(category)
                 .description(eventDtoNew.getDescription())
                 .eventDate(eventDtoNew.getEventDate())
-                .location(eventDtoNew.getLocation())
+                .lat(eventDtoNew.getLocation().getLat())
+                .lon(eventDtoNew.getLocation().getLon())
                 .paid(eventDtoNew.getPaid())
                 .participantLimit(eventDtoNew.getParticipantLimit())
                 .requestModeration(eventDtoNew.getRequestModeration())
@@ -91,16 +93,20 @@ public class EventMapper {
     }
 
     public static Event fromEventDtoUpdateAdmin(EventDtoUpdateAdmin eventDtoUpdateAdmin, Category category) {
-        return Event.builder()
+        Event event = Event.builder()
                 .annotation(eventDtoUpdateAdmin.getAnnotation())
                 .category(category)
                 .description(eventDtoUpdateAdmin.getDescription())
                 .eventDate(eventDtoUpdateAdmin.getEventDate())
-                .location(eventDtoUpdateAdmin.getLocation())
                 .paid(eventDtoUpdateAdmin.getPaid())
                 .participantLimit(eventDtoUpdateAdmin.getParticipantLimit())
                 .requestModeration(eventDtoUpdateAdmin.getRequestModeration())
                 .title(eventDtoUpdateAdmin.getTitle())
                 .build();
+        if (eventDtoUpdateAdmin.getLocation() != null) {
+            event.setLat(eventDtoUpdateAdmin.getLocation().getLat());
+            event.setLon(eventDtoUpdateAdmin.getLocation().getLon());
+        }
+        return event;
     }
 }
